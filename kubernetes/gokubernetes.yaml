@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: golangwebapi
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: golangwebapi
+  template:
+    metadata:
+      labels:
+        app: golangwebapi
+    spec:
+      containers:
+      - name: golangwebapi
+        image: gfk76/gplangwebapi:latest
+        ports:
+        - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: golangwebapi
+spec:
+  selector:
+    app: golangwebapi
+  ports:
+    - protocol: TCP
+      port: 8080
